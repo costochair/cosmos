@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cosmos</title>
+  <style>
+    body {
+      margin: 0;
+      overflow: hidden;
+      background: linear-gradient(135deg, #1a1a40, #0f0c29);
+      height: 100vh;
+    }
+    .star {
+      position: absolute;
+      width: 2px;
+      height: 2px;
+      background-color: white;
+      border-radius: 50%;
+      box-shadow: 0 0 5px rgba(255, 255, 255, 0.8);
+    }
+  </style>
+</head>
+<body>
+  <div class="stars-container"></div>
+  <script>
+    const NUM_STARS = 200;
+    const STAR_SPEED = 0.5;
+    const starsContainer = document.querySelector('.stars-container');
+    for (let i = 0; i < NUM_STARS; i++) {
+      const star = document.createElement('div');
+      star.classList.add('star');
+      star.style.left = `${Math.random() * 100}vw`;
+      star.style.top = `${Math.random() * 100}vh`;
+      starsContainer.appendChild(star);
+    }
+    function animateStars() {
+      const stars = document.querySelectorAll('.star');
+      stars.forEach(star => {
+        let y = parseFloat(star.style.top);
+        y += STAR_SPEED;
+        if (y > 100) {
+          y = -5;
+          star.style.left = `${Math.random() * 100}vw`;
+        }
+        star.style.top = `${y}vh`;
+      });
+      requestAnimationFrame(animateStars);
+    }
+    animateStars();
+  </script>
+</body>
+</html>
